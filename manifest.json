@@ -8,10 +8,15 @@
     },
 
     "permissions": [
+        "storage",
         "activeTab",
         "background",
         "http://*/*",
         "https://*/*"
+    ],
+
+    "scripts": [
+        "content.js"
     ],
 
     "manifest_version": 2

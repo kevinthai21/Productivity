@@ -1,0 +1,18 @@
+{
+    "name": "Productivity Extension",
+    "version": "1.0",
+    "description": "An extension that can help improve your productivity",
+
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+
+    "permissions": [
+        "activeTab",
+        "background",
+        "http://*/*",
+        "https://*/*"
+    ],
+
+    "manifest_version": 2
+}

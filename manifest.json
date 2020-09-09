@@ -14,10 +14,10 @@
         "http://*/*",
         "https://*/*"
     ],
-
-    "scripts": [
-        "content.js"
-    ],
+    "background": {
+        "scripts": ["background.js"],
+        "presistent": false
+    },
 
     "manifest_version": 2
 }

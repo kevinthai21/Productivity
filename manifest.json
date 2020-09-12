@@ -11,6 +11,8 @@
         "storage",
         "activeTab",
         "background",
+        "webRequest",
+        "webRequestBlocking",
         "http://*/*",
         "https://*/*"
     ],

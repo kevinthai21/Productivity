@@ -1,13 +1,13 @@
 var storage = chrome.storage.local;
+var blockedSites = ["facebook.com", "youtube.com", "twitter.com"];
+var blockedStates = [true, true, true];
 
 console.log("Hello");
-blockSite();
-// findDomain();
+
 function blockSite() 
 {
-    // window.location.replace("blockedSite.html");
-    console.log(chrome.url);
-    return {cancel: true};
+    console.log("Found blocked site.");
+    chrome.tabs.goBack();
 }
 
 function findDomain() 
@@ -26,7 +26,19 @@ function findDomain()
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         console.log(details);
-        return {cancel:true}
+        chrome.storage.local.get("state", function(data) {
+            state = data.state;
+            // console.log("State: " + state);
+            for (index=0; index<blockedSites.length; index++) {
+                if(details.url&& state &&
+                    details.url.includes(blockedSites[index])) {
+                        if(blockedStates[index] == true) {
+                            blockSite();
+                            break;
+                        }
+                    }
+            }
+        })
     },
     {urls: ["<all_urls>"]}
 );

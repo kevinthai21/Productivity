@@ -1,12 +1,13 @@
 var stringOff = "Start";
 var stringOn = "Stop";
 
-var buttonState = document.getElementById("stateChange");
+var buttonState = document.getElementById("changeState");
 var buttonSetting = document.getElementById("settingsButton");
 
 buttonState.addEventListener("click", clickState);
 buttonSetting.addEventListener("click", clickSetting);
 
+console.log(document.URL);
 var storage = chrome.storage.local;
 storage.get("state", function(x) {
     if( x.state == true) buttonState.innerText = stringOn;

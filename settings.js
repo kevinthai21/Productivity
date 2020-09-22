@@ -1,12 +1,16 @@
 var storage = chrome.storage.local;
-setDefault();
 
+var blockedSitesOutput = document.getElementById("blockedSites");
 var userInput = document.getElementById("inputLink");
 var userEnter = document.getElementById("inputEnter");
 var userInputDelete = document.getElementById("inputDeleteLink");
 var userEnterDelete = document.getElementById("inputDeleteEnter");
 userEnter.addEventListener("click", addLink);
 userEnterDelete.addEventListener("click", deleteLink);
+
+
+// TODO: work on later
+// alert(blockedSitesOutput.innerText);/
 
 function addLink()
 {  
@@ -47,10 +51,7 @@ function deleteLink()
                 return;
             }
         }
-    }
+    });
 
 }
 
-function setDefault() {
-    storage.set({"links": ['facebook.com','youtube.com','twitter.com']});
-}

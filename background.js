@@ -4,33 +4,14 @@ var blockedSites = ["facebook.com", "youtube.com", "twitter.com",
                         "linkedin.com", "instagram.com"];
 var blockedState = [true, true, true, true, true];
 
-
 var numDefaultBlocked = 5;
-// document.URL = "settings.html"
-// console.log("Document <Should be background.js>: " + document);
-// console.log("Document scripts: " + document.URL);
-// var inputSite = document.getElementById("addLink");
-// var buttonEnter = document.getElementById("inputEnter");
-// if(inputSite)
-// {
-//     console.log("hello")
-// }
-
-// if(buttonEnter)  {
-//     buttonEnter.addEventListener("click", addLink);
-//     console.log("Hello")
-// }
-
 
 setDefault();
-
 
 // Works fine, atm
 function blockSite() 
 {
     // console.log("Found blocked site.");
-    //chrome.tabs.goBack();
-    // chrome.tabs.create({url: "blockedSite.html"})
     chrome.tabs.update({url: "blockedSite.html"})
 }
 
@@ -53,11 +34,10 @@ chrome.webRequest.onBeforeRequest.addListener(
         chrome.storage.local.get(["state", "links"], function(data) {
             state = data.state;
             links = data.links;
-            console.log(details.url)
-            console.log(links);
-            // console.log("State: " + state);
+
+            if(!state) return;
+
             for(index=0; index< links.length; index++) {
-                console.log("Comparing with: " + links[index]);
                 if (details.url && state && 
                     details.url.includes(links[index])) {
                     // if(blockedState[index] == true) {

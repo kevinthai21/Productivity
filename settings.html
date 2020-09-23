@@ -2,21 +2,17 @@
     <body>
         <h1>Settings</h1>
         <h2>Blocked Websites</h2>
-        <p>These websites are blocked by default.</p>
         <ul id="blockedSites">
-            <li>youtube.com</li>
-            <li>twitter.com</li>
-            <li>facebook.com</li>
         </ul>
         <h2>Add a website to the blocked list: </h2>
-        <form method="post">
+        <form>
             <input type="text" id="inputLink" input size = "75" name = "add_link">
-            <input type="button" id="inputEnter">Add website</button>
+            <button id="inputEnter">Add website</button>
         </form>
         <h2>Delete a website from the list: </h2>
-        <form method="post">
+        <form>
             <input type="text" id="inputDeleteLink" input size = "75" name = "add_link">
-            <input type="button" id="inputDeleteEnter">Delete website</button>
+            <button id="inputDeleteEnter">Delete website</button>
         </form>
         <script src="settings.js"></script>
     </body>

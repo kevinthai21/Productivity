@@ -9,6 +9,7 @@ userEnter.addEventListener("click", addLink);
 userEnterDelete.addEventListener("click", deleteLink);
 
 
+updateOutput();
 // TODO: work on later
 // alert(blockedSitesOutput.innerText);/
 
@@ -35,6 +36,7 @@ function addLink()
         console.log(x.links);
         console.log("<Successfully added '" + inputValue + "'>");
     });
+    updateOutput();
 }
 
 
@@ -48,10 +50,31 @@ function deleteLink()
             if(x.links[i] == deleteValue) {
                 x.links.splice(i,1);
                 console.log("<Successfully deleted '" + deleteValue + "'>");
+
+                storage.set({"links": x.links});
+                console.log(x.links);
                 return;
             }
         }
     });
+    updateOutput();
 
 }
 
+function updateOutput()
+{
+    storage.get("links", function(data)
+    {
+        var list = document.createElement('ul');
+        for(index in data.links)
+        {
+            var listItem = document.createElement('li');
+            listItem.appendChild(document.createTextNode(data.links[index]));
+
+            list.appendChild(listItem);
+        }
+        blockedSitesOutput.innerHTML = list.innerHTML;
+    });
+
+    // alert("Updated the list!");
+}

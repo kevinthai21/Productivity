@@ -40,8 +40,11 @@ chrome.webRequest.onBeforeRequest.addListener(
             for(index=0; index< links.length; index++) {
                 if (details.url && state && 
                     details.url.includes(links[index])) {
+                        if (details.url.includes("settings.html?add_link=" + links[index])) {
+                            return;
+                        }
                     // if(blockedState[index] == true) {
-                        console.log("Found a site.");
+                        console.log("Found a site: " + details.url);
                         blockSite();
                     // }
                     return;

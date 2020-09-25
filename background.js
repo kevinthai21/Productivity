@@ -1,5 +1,6 @@
 var storage = chrome.storage.local;
-var state, links;
+var state, links, time;
+var totalSeconds;
 var blockedSites = ["facebook.com", "youtube.com", "twitter.com", 
                         "linkedin.com", "instagram.com"];
 var blockedState = [true, true, true, true, true];
@@ -7,6 +8,8 @@ var blockedState = [true, true, true, true, true];
 var numDefaultBlocked = 5;
 
 setDefault();
+setInterval(setTime, 1000);
+
 
 // Works fine, atm
 function blockSite() 
@@ -27,6 +30,24 @@ function setDefault() {
     storage.set({"links": ['facebook.com','youtube.com','twitter.com', 'linkedin.com', 'instagram.com']});
 }
 
+function setTime()
+{
+    totalSeconds++;
+    chrome.storage.local.get(["state","time"], function(data)
+    {
+        state = data.state;
+
+        if(!state) 
+        {
+            totalSeconds = 0;
+            return;
+        }
+
+        storage.set({"time" : totalSeconds});
+
+    });
+}
+
 // This method works but has some bugs.
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
@@ -36,6 +57,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             links = data.links;
 
             if(!state) return;
+
 
             for(index=0; index< links.length; index++) {
                 if (details.url && state && 

@@ -19,7 +19,6 @@ storage.get("state", function(x) {
     }
     else buttonState.innerText = stringOff;
 });
-
 setInterval(changeTimeLabels, 1000);
 
 function clickState()
@@ -31,6 +30,7 @@ function clickState()
 
         if(x.state == false || x.state == undefined) 
         {
+            changeTimeLabels();
             newState = true;
             buttonState.innerText = stringOn;
         }
@@ -55,7 +55,6 @@ function clickSetting()
 
 function changeTimeLabels()
 {
-    console.log("time should change")
     storage.get(["time", "state"], function(data) 
     {
         if(!data.state) return;
@@ -70,20 +69,19 @@ function changeTimeLabels()
         else labelSeconds.innerText = seconds;
         if(minutes<10) 
         {
-            labelMinute.innerText = "0" + minutes;
+            labelMinute.innerText = "0" + minutes + ":";
         }
-        else labelMinute.innerText = minutes;
+        else labelMinute.innerText = minutes + ":";
         if(hours > 0) 
         {
             labelHour.innerHTML = hours + ":";
         }
-        console.log(data.time)
     });
 }
 
 function resetTimeLabels()
 {
-    labelSeconds.innerText = "00";
-    labelMinute.innerText = "00";
+    labelSeconds.innerText = "";
+    labelMinute.innerText = "";
     labelHour.innerText= "";
 }

@@ -1,0 +1,16 @@
+
+header {
+    font-size: 20;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+#changeState, #settingsButton {
+    padding: 5px;
+}
+
+HTML {
+    /* font-family: "Plantino Linotype"; */
+    background-color: #d4e8ee;
+    width: 200px;
+    height: 110px;
+}

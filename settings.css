@@ -1,7 +1,15 @@
 h1{
     display:blue;
-    border: solid 3px;
-    padding: 20px;
+    font-size:40px;
+    padding: 5px;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+h2 {
+    font-size: 25px;
+}
+HTML {
+    background-color: #d4e8ee;
+    font-size:20px;
 }
 
-/* testing out css styles, not final */

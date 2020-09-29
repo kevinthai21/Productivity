@@ -4,8 +4,21 @@ header {
     text-decoration: underline;
     text-decoration-style: dotted;
 }
+label.time {
+    font-size: 50px;
+    padding-left: 10px;
+
+}
 #changeState, #settingsButton {
     padding: 5px;
+}
+#changeState{
+    margin: 10px;
+    margin-left: 20px;
+}
+
+#settingsButton {
+    margin-left: 10px;
 }
 
 HTML {

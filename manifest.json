@@ -3,6 +3,10 @@
     "version": "1.0",
     "description": "An extension that can help improve your productivity",
 
+    "icons": {
+        "128": "128.png"
+    },
+
     "browser_action": {
         "default_popup": "popup.html"
     },

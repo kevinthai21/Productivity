@@ -10,8 +10,6 @@ userEnterDelete.addEventListener("click", deleteLink);
 
 
 updateOutput();
-// TODO: work on later
-// alert(blockedSitesOutput.innerText);/
 
 function addLink()
 {  

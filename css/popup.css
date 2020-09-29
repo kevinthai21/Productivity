@@ -7,7 +7,9 @@ header {
 label.time {
     font-size: 50px;
     padding-left: 10px;
-
+}
+#minutes, #seconds {
+    padding-left:5px;
 }
 #changeState, #settingsButton {
     padding: 5px;

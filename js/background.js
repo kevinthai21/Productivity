@@ -24,7 +24,7 @@ setInterval(setTime, 1000);
  */
 function blockSite() 
 {
-    chrome.tabs.update({url: "blockedSite.html"})
+    chrome.tabs.update({url: "../html/blockedSite.html"})
 }
 
 /*

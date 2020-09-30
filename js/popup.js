@@ -84,7 +84,7 @@ function clickState()
  */
 function clickSetting()
 {
-    chrome.tabs.create({url: "settings.html"});
+    chrome.tabs.create({url: "../html/settings.html"});
 }
 
 

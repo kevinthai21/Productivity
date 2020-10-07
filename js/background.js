@@ -36,6 +36,7 @@ function setDefault() {
     console.log("Set the default");
     storage.set({"links": ['facebook.com','youtube.com','twitter.com', 
         'linkedin.com', 'instagram.com']});
+    storage.set({"time": 0});
 }
 
 

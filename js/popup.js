@@ -62,6 +62,8 @@ function clickState()
         {
             changeTimeLabels();
             newState = true;
+            // storage.set({"time":0});
+            resetTimeLabels();
             buttonState.innerText = stringOn;
         }
         else 
@@ -69,7 +71,7 @@ function clickState()
             newState = false;
             buttonState.innerText = stringOff;
             storage.set({"time" : 0});
-            resetTimeLabels();
+            // resetTimeLabels();
         }
 
         storage.set({"state": newState});

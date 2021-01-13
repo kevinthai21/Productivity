@@ -16,6 +16,7 @@ var state, links, time, totalSeconds; // local vars that hold storage values
 
 setDefault();
 setInterval(setTime, 1000);
+setInterval(checkSite, 500);
 
 /*
  * Function: blockSite();
@@ -37,6 +38,7 @@ function setDefault() {
     storage.set({"links": ['facebook.com','youtube.com','twitter.com', 
         'linkedin.com', 'instagram.com']});
     storage.set({"time": 0});
+    storage.set({"distractions": 0});
 }
 
 
@@ -68,10 +70,47 @@ function setTime()
     });
 }
 
+function checkSite() {
+    chrome.tabs.query({active:true, lastFocusedWindow: true}, tabs => {
+        if (tabs[0].url == undefined) return;
+        let url = tabs[0].url;
+        if (url.includes("html/blockedSite.html")) return;
+        chrome.storage.local.get(["state","links", "distractions"], function(data) {
+
+            // Gets the data from the local storage
+            state = data.state;
+            links = data.links;
+            distractions = data.distractions;
+            // If not active productive session, then continue as normal.
+            if(!state) return;
+
+            // checks every entry for a blocked URL.
+            for(index=0; index< links.length; index++) {
+
+                // check if there is a URL and if it should be blocked
+                if (url && url.includes(links[index])) {
+
+                        // This link shows when wanting to add a link to the blocked list
+                        if (url.includes("settings.html?add_link=" + links[index])) {
+                            return;
+                        }
+
+                        // This will update the tab to not go to the blocked URL.
+                        blockSite();
+                    storage.set({"distractions" : (distractions + 1)})
+                        
+                    return;
+                }
+            }
+        })
+    });
+}
+
 /*
  * This is the listener that checks if the URL is part of the blocked list.
  * If so, then it will update the tab. If not, it will continue as usual.
  */
+/*
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         chrome.storage.local.get(["state", "links"], function(data) {
@@ -101,4 +140,4 @@ chrome.webRequest.onBeforeRequest.addListener(
             }
         })
     }, {urls: ["<all_urls>"]}
-);
+);*/

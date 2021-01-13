@@ -14,6 +14,7 @@
     "permissions": [
         "storage",
         "activeTab",
+        "tabs",
         "background",
         "webRequest",
         "webRequestBlocking",

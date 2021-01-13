@@ -21,6 +21,8 @@ var buttonSetting = document.getElementById("settingsButton");
 var labelHour = document.getElementById("hours");
 var labelMinute = document.getElementById("minutes");
 var labelSeconds = document.getElementById("seconds");
+var labelDistract = document.getElementById("numDistract");
+var stringDistract = document.getElementById("stringDistract");
 
 // Event listeners.
 buttonState.addEventListener("click", clickState);
@@ -41,6 +43,7 @@ storage.get("state", function(x) {
 
 // Calling this function every second.
 setInterval(changeTimeLabels, 1000);
+setInterval(checkDistractions, 10);
 
 
 /*
@@ -62,7 +65,6 @@ function clickState()
         {
             changeTimeLabels();
             newState = true;
-            // storage.set({"time":0});
             resetTimeLabels();
             buttonState.innerText = stringOn;
         }
@@ -71,7 +73,8 @@ function clickState()
             newState = false;
             buttonState.innerText = stringOff;
             storage.set({"time" : 0});
-            // resetTimeLabels();
+            storage.set({"distractions": 0});
+            checkDistractions();
         }
 
         storage.set({"state": newState});
@@ -124,6 +127,21 @@ function changeTimeLabels()
             labelHour.innerHTML = hours + ":";
         }
     });
+}
+
+function checkDistractions() {
+    chrome.storage.local.get(["distractions"], function(data)
+    {
+        distractions = data.distractions;
+        console.log("Num of distractions: " + distractions);
+        if (distractions == 0) stringDistract.innerText = "";
+        else 
+        {
+            labelDistract.innerText = distractions;
+            if (distractions == 1) stringDistract.innerText = "distraction!";
+            if (distractions >1) stringDistract.innerText = " distractions!";
+        }
+    })
 }
 
 /*

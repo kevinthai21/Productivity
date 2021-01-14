@@ -83,7 +83,7 @@ function clickState()
 }
 
 /*
- * Function clickSetting();
+ * Function: clickSetting();
  * Description: It opens a new tab to go to the HTML that the user
  * can change the settings with.
  */
@@ -129,13 +129,22 @@ function changeTimeLabels()
     });
 }
 
+/*
+ * Function: chheckDistractions() 
+ * Description: The function looks into the data to determine the
+ * number of distractions that has found since activating the productivity
+ * state. It will change the distraction labels in the popup.
+ */
 function checkDistractions() {
     chrome.storage.local.get(["distractions"], function(data)
     {
-        distractions = data.distractions;        
-        labelDistract.innerText = distractions;
+        // Gets the data
+        distractions = data.distractions;
+        
+        // Change the text depending on number.
+        labelDistract.innerText = distractions;        
         if (distractions == 1) stringDistract.innerText = "distraction!";
-        if (distractions != 1) stringDistract.innerText = " distractions!";
+        if (distractions !=1) stringDistract.innerText = " distractions!";
     })
 }
 

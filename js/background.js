@@ -70,6 +70,12 @@ function setTime()
     });
 }
 
+/*
+ * Function: checkSite()
+ * Description: It takes in the current tab and checks if its in the list
+ * of blocked websites. If it is not part of the list, then it does nothing
+ * and returns. If it is, then we redirect the user to the blockedSite.html.
+ */
 function checkSite() {
     chrome.tabs.query({active:true, lastFocusedWindow: true}, tabs => {
         if (tabs[0].url == undefined) return;

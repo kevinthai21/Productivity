@@ -132,15 +132,10 @@ function changeTimeLabels()
 function checkDistractions() {
     chrome.storage.local.get(["distractions"], function(data)
     {
-        distractions = data.distractions;
-        console.log("Num of distractions: " + distractions);
-        if (distractions == 0) stringDistract.innerText = "";
-        else 
-        {
-            labelDistract.innerText = distractions;
-            if (distractions == 1) stringDistract.innerText = "distraction!";
-            if (distractions >1) stringDistract.innerText = " distractions!";
-        }
+        distractions = data.distractions;        
+        labelDistract.innerText = distractions;
+        if (distractions == 1) stringDistract.innerText = "distraction!";
+        if (distractions != 1) stringDistract.innerText = " distractions!";
     })
 }
 

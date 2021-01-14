@@ -30,6 +30,9 @@ buttonSetting.addEventListener("click", clickSetting);
 
 var storage = chrome.storage.local;
 
+checkDistractions();
+changeTimeLabels();
+
 // When displaying the popup, the file has to get the state data
 // in order to keep consistency.
 storage.get("state", function(x) {
@@ -43,7 +46,7 @@ storage.get("state", function(x) {
 
 // Calling this function every second.
 setInterval(changeTimeLabels, 1000);
-setInterval(checkDistractions, 10);
+setInterval(checkDistractions, 500);
 
 
 /*
@@ -103,11 +106,11 @@ function changeTimeLabels()
 {
     storage.get(["time", "state"], function(data) 
     {
-	// if not productive state, then don't change anything
+	    // if not productive state, then don't change anything
         if(!data.state) return;
 
         // distinguish between seconds, minutes, hours from number of seconds
-	var seconds = parseInt(data.time%60);
+        var seconds = parseInt(data.time%60);   
         var minutes = parseInt((data.time/60)%60);
         var hours = parseInt(data.time/1200);
 	
@@ -136,7 +139,7 @@ function changeTimeLabels()
  * state. It will change the distraction labels in the popup.
  */
 function checkDistractions() {
-    chrome.storage.local.get(["distractions"], function(data)
+    chrome.storage.local.get(["distractions", "state"], function(data)
     {
         // Gets the data
         distractions = data.distractions;

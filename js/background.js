@@ -33,7 +33,8 @@ function blockSite()
  * Description: It will set the array to block major social media websites and
  * it will save it into the local storage.
  */
-function setDefault() {
+function setDefault() 
+{
     console.log("Set the default");
     storage.set({"links": ['facebook.com','youtube.com','twitter.com', 
         'linkedin.com', 'instagram.com']});
@@ -76,74 +77,40 @@ function setTime()
  * of blocked websites. If it is not part of the list, then it does nothing
  * and returns. If it is, then we redirect the user to the blockedSite.html.
  */
-function checkSite() {
-    chrome.tabs.query({active:true, lastFocusedWindow: true}, tabs => {
-        if (tabs[0].url == undefined) return;
+function checkSite() 
+{
+    chrome.storage.local.get(["state","links", "distractions"], function(data) 
+    {
+
+        // Gets the data from the local storage
+        state = data.state;
+        links = data.links;
+        distractions = data.distractions;
+        // If not active productive session, then continue as normal.
+        if(!state) return;
+
+        chrome.tabs.query({active:true, lastFocusedWindow: true}, tabs => 
+        {
+        if (tabs.length == 0) return;
         let url = tabs[0].url;
         if (url.includes("html/blockedSite.html")) return;
-        chrome.storage.local.get(["state","links", "distractions"], function(data) {
-
-            // Gets the data from the local storage
-            state = data.state;
-            links = data.links;
-            distractions = data.distractions;
-            // If not active productive session, then continue as normal.
-            if(!state) return;
-
             // checks every entry for a blocked URL.
-            for(index=0; index< links.length; index++) {
+            for(index=0; index< links.length; index++) 
+            {
 
                 // check if there is a URL and if it should be blocked
-                if (url && url.includes(links[index])) {
+                if (url && url.includes(links[index])) 
+                {
+                    // This link shows when wanting to add a link to the blocked list
+                    if (url.includes("settings.html?add_link=" + links[index])) return;
 
-                        // This link shows when wanting to add a link to the blocked list
-                        if (url.includes("settings.html?add_link=" + links[index])) {
-                            return;
-                        }
-
-                        // This will update the tab to not go to the blocked URL.
-                        blockSite();
+                    // This will update the tab to not go to the blocked URL.
+                    blockSite();
                     storage.set({"distractions" : (distractions + 1)})
                         
                     return;
                 }
             }
-        })
-    });
+        });
+    })
 }
-
-/*
- * This is the listener that checks if the URL is part of the blocked list.
- * If so, then it will update the tab. If not, it will continue as usual.
- */
-/*
-chrome.webRequest.onBeforeRequest.addListener(
-    function(details) {
-        chrome.storage.local.get(["state", "links"], function(data) {
-
-            // Gets the data from the local storage.
-            state = data.state;
-            links = data.links;
-
-            // If not active productive session, then continue as normal.
-            if(!state) return;
-
-            // checks every entry for a blocked URL.
-            for(index=0; index< links.length; index++) {
-
-                // check if there is a URL and if it should be blocked
-                if (details.url && details.url.includes(links[index])) {
-
-                        // This link shows when wanting to add a link to the blocked list
-                        if (details.url.includes("settings.html?add_link=" + links[index])) {
-                            return;
-                        }
-
-                        // This will update the tab to not go to the blocked URL.
-                        blockSite();
-                    return;
-                }
-            }
-        })
-    }, {urls: ["<all_urls>"]}
-);*/

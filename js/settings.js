@@ -38,7 +38,8 @@ function addLink()
     console.log("<Attempting to add '" + inputValue + "'>");
 
     // in the case that a user tries to add undefined value.
-    if(inputValue == 0) {
+    if(inputValue == 0) 
+    {
         alert("This is empty!");
         return;
     }
@@ -73,16 +74,19 @@ function deleteLink()
     console.log("<Attempting to delete '" + deleteValue + "'>");
 
     // if input was empty,
-    if(deleteValue == 0) {
+    if(deleteValue == 0) 
+    {
         alert("This is empty!");
         return;
     }
     storage.get("links", function(x)
     {
         // go through all of the links
-        for(i in x.links) {
+        for(i in x.links) 
+        {
             // if found,
-            if(x.links[i] == deleteValue) {
+            if(x.links[i] == deleteValue) 
+            {
                 // delete it from the list
                 x.links.splice(i,1);
                 console.log("<Successfully deleted '" + deleteValue + "'>");

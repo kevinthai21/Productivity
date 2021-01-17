@@ -138,7 +138,8 @@ function changeTimeLabels()
  * number of distractions that has found since activating the productivity
  * state. It will change the distraction labels in the popup.
  */
-function checkDistractions() {
+function checkDistractions() 
+{
     chrome.storage.local.get(["distractions", "state"], function(data)
     {
         // Gets the data

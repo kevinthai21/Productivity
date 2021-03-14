@@ -112,7 +112,7 @@ function changeTimeLabels()
         // distinguish between seconds, minutes, hours from number of seconds
         var seconds = parseInt(data.time%60);   
         var minutes = parseInt((data.time/60)%60);
-        var hours = parseInt(data.time/1200);
+        var hours = parseInt(data.time/3600);
 	
 	// write out the numbers onto the popup.
         if(seconds<10) 

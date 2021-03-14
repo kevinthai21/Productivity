@@ -64,7 +64,7 @@ function setTime()
             totalSeconds = 0;
             return;
         }
-	    totalSeconds++;
+        totalSeconds++;
 
         storage.set({"time" : totalSeconds});
 

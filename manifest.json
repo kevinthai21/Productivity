@@ -1,6 +1,6 @@
 {
     "name": "Productivity Extension",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "description": "An extension that can help improve your productivity by limiting access to social media or any website the user choose to block.",
 
     "icons": {
@@ -18,11 +18,7 @@
         "storage",
         "activeTab",
         "tabs",
-        "background",
-        "webRequest",
-        "webRequestBlocking",
-        "http://*/*",
-        "https://*/*"
+        "background"
     ],
     "background": {
         "service_worker": "js/background.js",
